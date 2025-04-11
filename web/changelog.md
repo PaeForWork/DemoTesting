@@ -1,3 +1,9 @@
+# 0.0.3 (12 April 2025) by Pison
+
+## revise Credit calculation from prototype to main version
+
+==================================================
+
 # 0.0.2 (12 April 2025) by Pison
 
 ## create Credit calculation in index.js

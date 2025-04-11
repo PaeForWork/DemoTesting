@@ -6,13 +6,6 @@ const CREDIT_RULES = {
 };
 
 function createCreditObject(type, amount, expiry, used = 0) {
-  // Calculate top-up expiry date at creation time
-  if (type === 'topup') {
-    const creationDate = new Date();
-    expiry = new Date(creationDate);
-    expiry.setDate(expiry.getDate() + CREDIT_RULES.topup.expiryDays);
-  }
-
   return {
     type,
     amount,
@@ -102,13 +95,14 @@ function calculateTotal() {
 
   // Get expiry dates
   const packageExpiry = new Date(document.getElementById("packageExpiry").value);
+  const topUpExpiry = new Date(document.getElementById("topUpExpiry").value);
   const currentDate = new Date();
 
   // Create credit objects
   const credits = [
     createCreditObject('free', freeCredit, null),
     createCreditObject('package', packageCredit, packageExpiry),
-    createCreditObject('topup', topUpCredit) // Top-up expiry is calculated at creation
+    createCreditObject('topup', topUpCredit, topUpExpiry)
   ];
 
   // Calculate credit usage
@@ -140,6 +134,7 @@ function testFutureScenario() {
 
   // Get expiry dates
   const packageExpiry = new Date(document.getElementById("packageExpiry").value);
+  const topUpExpiry = new Date(document.getElementById("topUpExpiry").value);
   
   // Create future date
   const futureDate = new Date();
@@ -149,7 +144,7 @@ function testFutureScenario() {
   const credits = [
     createCreditObject('free', freeCredit, null),
     createCreditObject('package', packageCredit, packageExpiry),
-    createCreditObject('topup', topUpCredit) // Top-up expiry is calculated at creation
+    createCreditObject('topup', topUpCredit, topUpExpiry)
   ];
 
   // Calculate credit usage for future scenario
